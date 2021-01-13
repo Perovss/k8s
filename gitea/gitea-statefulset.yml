@@ -3,7 +3,6 @@ kind: Service
 metadata:
   name: gitea
 spec:
-
   ports:
   - protocol: TCP
     port: 3000
