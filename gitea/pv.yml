@@ -2,6 +2,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  namespace: gitea 
   name: postgres-pv-volume
   labels:
     type: gitea
@@ -17,6 +18,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  namespace: gitea 
   name: postgres-task-claim
 spec:
   storageClassName: manual
