@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: gitea
+spec:
+  serviceName: "gitea"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitea
+  template:
+    metadata:
+      labels:
+        app: gitea
+    spec:
+      volumes:
+        - name: postgres-volume
+          persistentVolumeClaim:
+            claimName: postgres-task-claim
+      containers:
+        - image: gitea/gitea:1.13.1
+          name: gitea
+          env:
+            - name: USER_UID
+              value: "1000"
+            - name: USER_GID
+              value: "1000"
+            - name: DB_TYPE
+              value: postgres
+            - name: DB_HOST
+              value: postgres-service:5432
+            - name: DB_NAME
+              value: gitea
+            - name: DB_USER
+              value: gitea
+            - name: DB_PASSWD
+              value: gitea
+          ports:
+            - containerPort: 3000
+            - containerPort: 222
+              protocol: TCP
+          volumeMounts:
+            - mountPath: "/test"
+              name: postgres-volume
