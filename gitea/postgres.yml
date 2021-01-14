@@ -4,33 +4,28 @@ kind: StatefulSet
 metadata:
   name: postgres
 spec:
-  replicas: 1
   serviceName: "postgres"
+  replicas: 1
   selector:
     matchLabels:
-      app: gitea
+      app: postgres
   template:
     metadata:
       labels:
-        app: gitea
+        app: postgres
     spec:
-
       volumes:
         - name: postgres-volume
           persistentVolumeClaim:
             claimName: postgres-task-claim
+        - name: postgres-config
+          configMap:
+            name: configmap-postgres
       containers:
         - image: postgres:9.6
           name: postgres
           ports:
-            - containerPort: 5432
-          env:
-            - name: POSTGRES_USER
-              value: gitea
-            - name: POSTGRES_PASSWORD
-              value: gitea
-            - name: POSTGRES_DB
-              value: gitea
+          - containerPort: 5432
           volumeMounts:
             - mountPath: "/var/lib/postgresql/data"
               name: postgres-volume
