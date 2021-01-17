@@ -7,13 +7,9 @@ data:
   POSTGRES_USER: gitea
   POSTGRES_PASSWORD: gitea
   POSTGRES_DB: gitea
-  USER_UID: "1000"
-  USER_GID: "1000"
-  DB_TYPE: postgres
-  DB_HOST: postgres-service:5432
-  DB_NAME: gitea
-  DB_USER: gitea
-  DB_PASSWD: gitea
+
+
+
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -23,7 +19,7 @@ data:
   USER_UID: "1000"
   USER_GID: "1000"
   DB_TYPE: postgres
-  DB_HOST: postgres-service:5432
+  DB_HOST: 172-17-0-5.default.pod.cluster.local:5432
   DB_NAME: gitea
   DB_USER: gitea
   DB_PASSWD: gitea

@@ -4,6 +4,7 @@ kind: Service
 metadata:
   name: gitea
 spec:
+  type: NodePort
   ports:
   - protocol: TCP
     port: 3000
