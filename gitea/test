@@ -1,33 +1,4 @@
----
 apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: gitea
-  name: configmap-postgres
-data:
-  POSTGRES_USER: gitea
-  POSTGRES_PASSWORD: gitea
-  POSTGRES_DB: gitea
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: gitea
-  name: configmap-gitea
-data:
-  USER_UID: "1000"
-  USER_GID: "1000"
-  DB_TYPE: postgres
-  DB_HOST: 172-17-0-4.default.pod.cluster.local:5432
-  DB_NAME: gitea
-  DB_USER: gitea
-  DB_PASSWD: gitea
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: gitea
-  name: appini
 data:
   app.ini: "APP_NAME = Gitea: Git with a cup of tea\nRUN_MODE = prod\nRUN_USER = git\n\n[repository]\nROOT
     = /data/git/repositories\n\n[repository.local]\nLOCAL_COPY_PATH = /data/gitea/tmp/local-repo\n\n[repository.upload]\nTEMP_PATH
@@ -54,4 +25,20 @@ data:
     \      = true\nNO_REPLY_ADDRESS                  = noreply.localhost\n\n[oauth2]\nJWT_SECRET
     = 5xBvwFePHdI-OVrnX1hjoWGhPFsih5F9eUO3os_7pCE\n\n[mailer]\nENABLED = false\n\n[openid]\nENABLE_OPENID_SIGNIN
     = true\nENABLE_OPENID_SIGNUP = true\n"
-
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2021-01-17T06:08:54Z"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        .: {}
+        f:app.ini: {}
+    manager: kubectl-create
+    operation: Update
+    time: "2021-01-17T06:08:54Z"
+  name: appini
+  namespace: default
+  resourceVersion: "8402"
+  uid: d23d50d1-db5b-42c1-ada5-f80726c81a04

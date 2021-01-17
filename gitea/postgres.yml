@@ -2,8 +2,8 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  namespace: gitea
   name: postgres
-
 spec:
   serviceName: "postgres"
   replicas: 1
@@ -12,24 +12,25 @@ spec:
       app: postgres
   template:
     metadata:
+      namespace: gitea
       labels:
         app: postgres
     spec:
+      containers:
+      - image: postgres:9.6
+        name: postgres
+
+        envFrom:
+        - configMapRef:
+            name: configmap-postgres
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+          - mountPath: "/var/lib/postgresql/data"
+            name: postgres-volume
       hostname: postgres
       subdomain: gitea
       volumes:
         - name: postgres-volume
           persistentVolumeClaim:
             claimName: postgres-task-claim
-        
-      containers:
-        - image: postgres:9.6
-          name: postgres
-          envFrom:
-          - configMapRef:
-              name: configmap-postgres
-          ports:
-          - containerPort: 5432
-          volumeMounts:
-            - mountPath: "/var/lib/postgresql/data"
-              name: postgres-volume
