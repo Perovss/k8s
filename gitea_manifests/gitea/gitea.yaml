@@ -3,6 +3,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   namespace: {{ctx.namespace}}
+  name: gitea
 spec:
   serviceName: "gitea"
   replicas: 1
@@ -16,7 +17,7 @@ spec:
     spec:
       containers:
         - image: {{gitea_image}}
-          namespace: {{ctx.namespace}}
+          name: gitea
 
           envFrom:
           - configMapRef:
@@ -26,7 +27,7 @@ spec:
             - containerPort: 222
               protocol: TCP
           volumeMounts:
-            - mountPath:{{gitea.gitea_mountPath}}
+            - mountPath: {{gitea.gitea_mountPath}}
               name: postgres-volume
             - mountPath: "./data/gitea/conf"
               readOnly: true

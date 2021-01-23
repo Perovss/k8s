@@ -13,6 +13,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            namespace: {{ctx.namespace}}
+            name: gitea
             port:
               number: {{gitea.gitea_port}}
