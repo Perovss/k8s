@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gitea
+  namespace: {{ctx.namespace}}
+spec:
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: {{gitea.gitea_port}}
+    targetPort: {{gitea.gitea_port}}
+  selector:
+    app: gitea

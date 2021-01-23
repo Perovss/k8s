@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ctx.namespace}}
+  name: configmap-gitea
+data:
+  USER_UID: "1000"
+  USER_GID: "1000"
+  DB_TYPE: postgres
+  DB_HOST: {{postgres.postgres_host}}:{{postgres.postgres_port}}
+  DB_name: gitea
+  DB_USER: gitea
+  DB_PASSWD: gitea

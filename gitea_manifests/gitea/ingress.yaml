@@ -1,0 +1,25 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gitea-service-ingress
+  namespace: {{ctx.namespace}}
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            namespace: {{ctx.namespace}}
+            port:
+              number: {{gitea.gitea_port}}
+      - path: /db
+        pathType: Prefix
+        backend:
+          service:
+            name: postgres
+            port:
+              number: {{postgres.postgres_port}}

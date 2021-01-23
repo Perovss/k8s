@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: {{ctx.namespace}}
+spec:
+  serviceName: "gitea"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gitea
+  template:
+    metadata:
+      labels:
+        app: gitea
+    spec:
+      containers:
+        - image: gitea/gitea:1.13.1
+          namespace: {{ctx.namespace}}
+
+          envFrom:
+          - configMapRef:
+              name: configmap-gitea
+          ports:
+            - containerPort: {{gitea.gitea_port}}
+            - containerPort: 222
+              protocol: TCP
+          volumeMounts:
+            - mountPath: "/test"
+              name: postgres-volume
+            - mountPath: "./data/gitea/conf"
+              readOnly: true
+              name: appini-volume
+      volumes:
+        - name: postgres-volume
+          persistentVolumeClaim:
+            claimName: postgres-task-claim
+        - name: gitea-config
+          configMap:
+            name: configmap-gitea    
+        - name: appini-volume
+          configMap:
+            name: appini  

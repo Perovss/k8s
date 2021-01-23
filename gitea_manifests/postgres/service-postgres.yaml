@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ctx.namespace}}
+  name: postgres
+spec:
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: {{postgres.postgres_port}}
+    targetPort: {{postgres.postgres_port}}
+  selector:
+    app: gitea

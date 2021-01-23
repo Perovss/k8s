@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: {{ctx.namespace}}
+  name: postgres
+spec:
+  serviceName: "postgres"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      namespace: {{ctx.namespace}}
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - image: postgres:9.6
+        name: postgres
+
+        envFrom:
+        - configMapRef:
+            name: configmap-postgres
+        ports:
+        - containerPort: {{postgres.postgres_port}}
+        volumeMounts:
+          - mountPath: "/var/lib/postgresql/data"
+            name: postgres-volume
+      hostname: postgres
+      subdomain: gitea
+      volumes:
+        - name: postgres-volume
+          persistentVolumeClaim:
+            claimName: postgres-task-claim

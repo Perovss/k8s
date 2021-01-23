@@ -1,0 +1,29 @@
+---
+ctx:
+  namespace: gitea
+
+global:
+  host: example.com
+  postgres_image: "postgres:9.6"
+  gitea_image: "postgres:9.6"
+  gitea:
+    gitea_port: 3000
+  postgres:
+    postgres_port: 5432
+    postgres_host: "172.17.0.4"
+#import:
+#- versions.yaml
+#- vars/test/
+
+include:
+
+#----------------------------------------------------------------------------
+# gitea common
+
+- name: gitea_manifests
+  include:
+  - name: namespace
+  - name: pv
+  - name: configmap
+  - name: postgres
+  - name: gitea
