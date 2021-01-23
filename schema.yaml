@@ -5,12 +5,16 @@ ctx:
 global:
   host: example.com
   postgres_image: "postgres:9.6"
-  gitea_image: "postgres:9.6"
+  gitea_image: "gitea/gitea:1.13.1"
+  gitea_data: gitea
   gitea:
     gitea_port: 3000
+    gitea_mountPath: "/test"
   postgres:
     postgres_port: 5432
     postgres_host: "172.17.0.4"
+  pv:
+    storage: 1Gi
 #import:
 #- versions.yaml
 #- vars/test/

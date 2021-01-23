@@ -9,9 +9,9 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 1Gi
+    storage: {{pv.storage}}
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/test"
+    path: {{gitea.gitea_mountPath}}
 
