@@ -5,7 +5,7 @@ metadata:
   name: gitea
   namespace: {{ctx.namespace}}
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
   - protocol: TCP
     port: {{gitea.gitea_port}}
