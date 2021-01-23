@@ -27,7 +27,7 @@ spec:
             - containerPort: 222
               protocol: TCP
           volumeMounts:
-            - mountPath: {{gitea.gitea_mountPath}}
+            - mountPath: "/test"
               name: postgres-volume
             - mountPath: "./data/gitea/conf"
               readOnly: true

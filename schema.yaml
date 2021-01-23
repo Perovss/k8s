@@ -9,7 +9,6 @@ global:
   gitea_data: gitea
   gitea:
     gitea_port: 3000
-    gitea_mountPath: "/test"
   postgres:
     postgres_port: 5432
     postgres_host: "172.17.0.4"
