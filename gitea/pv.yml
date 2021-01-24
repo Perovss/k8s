@@ -11,7 +11,7 @@ spec:
   capacity:
     storage: 1Gi
   accessModes:
-    - ReadWriteMany
+  - ReadWriteMany
   hostPath:
     path: "/test"
 ---
@@ -23,7 +23,7 @@ metadata:
 spec:
   storageClassName: manual
   accessModes:
-    - ReadWriteMany
+  - ReadWriteMany
   resources:
     requests:
       storage: 1Gi

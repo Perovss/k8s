@@ -11,7 +11,7 @@ spec:
   capacity:
     storage: {{pv.storage}}
   accessModes:
-    - ReadWriteMany
+  - ReadWriteMany
   hostPath:
     path: "/test"
 
