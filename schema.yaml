@@ -3,6 +3,7 @@ ctx:
   namespace: gitea
 
 global:
+  enable_persistent: true
   host: example.com
   postgres_image: "postgres:9.6"
   gitea_image: "gitea/gitea:1.13.1"

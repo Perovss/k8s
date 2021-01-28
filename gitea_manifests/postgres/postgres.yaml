@@ -19,6 +19,31 @@ spec:
       containers:
       - image: {{postgres_image}}
         name: postgres
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - exec pg_isready -U "postgres" -h 127.0.0.1 -p {{postgres.postgres_port}}
+          failureThreshold: 6
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5 
+        readinessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - -e
+            - |
+              exec pg_isready -U "postgres" -h 127.0.0.1 -p {{postgres.postgres_port}}
+              [ -f /opt/bitnami/postgresql/tmp/.initialized ] || [ -f /bitnami/postgresql/.initialized ]
+          failureThreshold: 6
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
         envFrom:
         - configMapRef:
             name: configmap-postgres
@@ -29,5 +54,9 @@ spec:
           name: postgres-volume
       volumes:
       - name: postgres-volume
+        {% if enable_persistent %}
         persistentVolumeClaim:
           claimName: postgres-task-claim
+        {% else %}
+        emptyDir: {}
+        {% endif %}
