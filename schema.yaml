@@ -3,11 +3,12 @@ ctx:
   namespace: gitea
 
 global:
+  app_name_pos: postgres
+  app_name_git: gitea
   enable_persistent: true
   host: example.com
   postgres_image: "postgres:9.6"
   gitea_image: "gitea/gitea:1.13.1"
-  gitea_data: gitea
   gitea:
     gitea_port1: 3000
     gitea_port2: 222

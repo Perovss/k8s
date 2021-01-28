@@ -3,28 +3,28 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   namespace: {{ctx.namespace}}
-  name: postgres
+  name: {{app_name_pos}}
 spec:
-  serviceName: "postgres"
+  serviceName: "{{app_name_pos}}"
   replicas: 1
   selector:
     matchLabels:
-      app: postgres
+      app: {{app_name_pos}}
   template:
     metadata:
       namespace: {{ctx.namespace}}
       labels:
-        app: postgres
+        app: {{app_name_pos}}
     spec:
       containers:
       - image: {{postgres_image}}
-        name: postgres
+        name: {{app_name_pos}}
         livenessProbe:
           exec:
             command:
             - /bin/sh
             - -c
-            - exec pg_isready -U "postgres" -h 127.0.0.1 -p {{postgres.postgres_port}}
+            - exec pg_isready -U "{{app_name_pos}}" -h 127.0.0.1 -p {{postgres.postgres_port}}
           failureThreshold: 6
           initialDelaySeconds: 30
           periodSeconds: 10
@@ -37,7 +37,7 @@ spec:
             - -c
             - -e
             - |
-              exec pg_isready -U "postgres" -h 127.0.0.1 -p {{postgres.postgres_port}}
+              exec pg_isready -U "{{app_name_pos}}" -h 127.0.0.1 -p {{postgres.postgres_port}}
               [ -f /opt/bitnami/postgresql/tmp/.initialized ] || [ -f /bitnami/postgresql/.initialized ]
           failureThreshold: 6
           initialDelaySeconds: 5
@@ -46,17 +46,17 @@ spec:
           timeoutSeconds: 5
         envFrom:
         - configMapRef:
-            name: configmap-postgres
+            name: configmap-{{app_name_pos}}
         ports:
         - containerPort: {{postgres.postgres_port}}
         volumeMounts:
         - mountPath: "/var/lib/postgresql/data"
-          name: postgres-volume
+          name: {{app_name_pos}}-volume
       volumes:
-      - name: postgres-volume
+      - name: {{app_name_pos}}-volume
         {% if enable_persistent %}
         persistentVolumeClaim:
-          claimName: postgres-task-claim
+          claimName: {{app_name_pos}}-task-claim
         {% else %}
         emptyDir: {}
         {% endif %}

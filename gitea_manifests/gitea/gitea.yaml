@@ -3,21 +3,21 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   namespace: {{ctx.namespace}}
-  name: gitea
+  name: {{app_name_git}}
 spec:
-  serviceName: "gitea"
+  serviceName: "{{app_name_git}}"
   replicas: 1
   selector:
     matchLabels:
-      app: gitea
+      app: {{app_name_git}}
   template:
     metadata:
       labels:
-        app: gitea
+        app: {{app_name_git}}
     spec:
       containers:
       - image: {{gitea_image}}
-        name: gitea
+        name: {{app_name_git}}
         livenessProbe:
           httpGet:
             path: /
@@ -38,28 +38,28 @@ spec:
           timeoutSeconds: 5
         envFrom:
         - configMapRef:
-            name: configmap-gitea
+            name: configmap-{{app_name_git}}
         ports:
         - containerPort: {{gitea.gitea_port1}}
         - containerPort: {{gitea.gitea_port2}}
           protocol: TCP
         volumeMounts:
         - mountPath: "/test"
-          name: postgres-volume
+          name: {{app_name_pos}}-volume
         - mountPath: "./data/gitea/conf"
           readOnly: true
           name: appini-volume
       volumes:
-      - name: postgres-volume
+      - name: {{app_name_pos}}-volume
         {% if enable_persistent %}
         persistentVolumeClaim:
-          claimName: postgres-task-claim
+          claimName: {{app_name_pos}}-task-claim
         {% else %}
         emptyDir: {}
         {% endif %}
-      - name: gitea-config
+      - name: {{app_name_git}}-config
         configMap:
-          name: configmap-gitea
+          name: configmap-{{app_name_git}}
       - name: appini-volume
         configMap:
           name: appini

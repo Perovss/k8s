@@ -2,7 +2,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: gitea-service-ingress
+  name: {{app_name_git}}-service-ingress
   namespace: {{ctx.namespace}}
 spec:
   rules:
@@ -13,6 +13,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: gitea
+            name: {{app_name_git}}
             port:
               number: {{gitea.gitea_port1}}

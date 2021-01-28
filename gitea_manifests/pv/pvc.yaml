@@ -3,7 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   namespace: {{ctx.namespace}}
-  name: postgres-task-claim
+  name: {{app_name_pos}}-task-claim
 spec:
   storageClassName: manual
   accessModes:

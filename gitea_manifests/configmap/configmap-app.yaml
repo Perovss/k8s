@@ -36,9 +36,9 @@ data:
     PATH     = /data/gitea/gitea.db
     DB_TYPE  = postgres
     HOST     = "{{postgres.postgres_host}}:{{postgres.postgres_port}}"
-    NAME     = {{gitea_data}}
-    USER     = {{gitea_data}}
-    PASSWD   = {{gitea_data}}
+    NAME     = {{app_name_git}}
+    USER     = {{app_name_git}}
+    PASSWD   = gitea
     LOG_SQL  = false
     SCHEMA   = ""
     SSL_MODE = disable

@@ -3,9 +3,9 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   namespace: {{ctx.namespace}}
-  name: postgres-pv-volume
+  name: {{app_name_pos}}-pv-volume
   labels:
-    app: gitea
+    app: {{app_name_git}}
 spec:
   storageClassName: manual
   capacity:

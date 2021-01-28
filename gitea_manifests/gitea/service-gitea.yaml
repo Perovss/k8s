@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: gitea
+  name: {{app_name_git}}
   namespace: {{ctx.namespace}}
 spec:
   type: NodePort
@@ -11,4 +11,4 @@ spec:
     port: {{gitea.gitea_port1}}
     targetPort: {{gitea.gitea_port1}}
   selector:
-    app: gitea
+    app: {{app_name_git}}
