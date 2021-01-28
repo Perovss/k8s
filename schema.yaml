@@ -8,10 +8,11 @@ global:
   gitea_image: "gitea/gitea:1.13.1"
   gitea_data: gitea
   gitea:
-    gitea_port: 3000
+    gitea_port1: 3000
+    gitea_port2: 222
   postgres:
     postgres_port: 5432
-    postgres_host: "172.17.0.4"
+    postgres_host: "postgres"
   pv:
     storage: 1Gi
 #import:

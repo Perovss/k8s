@@ -16,28 +16,28 @@ spec:
         app: gitea
     spec:
       containers:
-        - image: {{gitea_image}}
-          name: gitea
-          envFrom:
-          - configMapRef:
-              name: configmap-gitea
-          ports:
-            - containerPort: {{gitea.gitea_port}}
-            - containerPort: 222
-              protocol: TCP
-          volumeMounts:
-            - mountPath: "/test"
-              name: postgres-volume
-            - mountPath: "./data/gitea/conf"
-              readOnly: true
-              name: appini-volume
+      - image: {{gitea_image}}
+        name: gitea
+        envFrom:
+        - configMapRef:
+            name: configmap-gitea
+        ports:
+        - containerPort: {{gitea.gitea_port1}}
+        - containerPort: {{gitea.gitea_port2}}
+          protocol: TCP
+        volumeMounts:
+        - mountPath: "/test"
+          name: postgres-volume
+        - mountPath: "./data/gitea/conf"
+          readOnly: true
+          name: appini-volume
       volumes:
-        - name: postgres-volume
-          persistentVolumeClaim:
-            claimName: postgres-task-claim
-        - name: gitea-config
-          configMap:
-            name: configmap-gitea    
-        - name: appini-volume
-          configMap:
-            name: appini  
+      - name: postgres-volume
+        persistentVolumeClaim:
+          claimName: postgres-task-claim
+      - name: gitea-config
+        configMap:
+          name: configmap-gitea
+      - name: appini-volume
+        configMap:
+          name: appini

@@ -15,4 +15,4 @@ spec:
           service:
             name: gitea
             port:
-              number: {{gitea.gitea_port}}
+              number: {{gitea.gitea_port1}}

@@ -21,10 +21,10 @@ data:
 
     [server]
     APP_DATA_PATH    = /data/gitea
-    DOMAIN           = localhost
-    SSH_DOMAIN       = localhost
-    HTTP_PORT        = {{gitea.gitea_port}}
-    ROOT_URL         = http://{{host}}:{{gitea.gitea_port}}/
+    DOMAIN           = {{host}}
+    SSH_DOMAIN       = {{host}}
+    HTTP_PORT        = {{gitea.gitea_port1}}
+    ROOT_URL         = http://{{host}}
     DISABLE_SSH      = false
     SSH_PORT         = 22
     SSH_LISTEN_PORT  = 22
@@ -35,12 +35,12 @@ data:
     [database]
     PATH     = /data/gitea/gitea.db
     DB_TYPE  = postgres
-    HOST     = {{postgres.postgres_host}}:{{postgres.postgres_port}}
+    HOST     = "{{postgres.postgres_host}}:{{postgres.postgres_port}}"
     NAME     = {{gitea_data}}
     USER     = {{gitea_data}}
     PASSWD   = {{gitea_data}}
     LOG_SQL  = false
-    SCHEMA   = 
+    SCHEMA   = ""
     SSL_MODE = disable
     CHARSET  = utf8
 

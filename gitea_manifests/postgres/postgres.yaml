@@ -19,18 +19,15 @@ spec:
       containers:
       - image: {{postgres_image}}
         name: postgres
-
         envFrom:
         - configMapRef:
             name: configmap-postgres
         ports:
         - containerPort: {{postgres.postgres_port}}
         volumeMounts:
-          - mountPath: "/var/lib/postgresql/data"
-            name: postgres-volume
-      hostname: postgres
-      subdomain: gitea
+        - mountPath: "/var/lib/postgresql/data"
+          name: postgres-volume
       volumes:
-        - name: postgres-volume
-          persistentVolumeClaim:
-            claimName: postgres-task-claim
+      - name: postgres-volume
+        persistentVolumeClaim:
+          claimName: postgres-task-claim

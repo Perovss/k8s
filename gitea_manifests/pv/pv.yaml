@@ -5,7 +5,7 @@ metadata:
   namespace: {{ctx.namespace}}
   name: postgres-pv-volume
   labels:
-    type: gitea
+    app: gitea
 spec:
   storageClassName: manual
   capacity:

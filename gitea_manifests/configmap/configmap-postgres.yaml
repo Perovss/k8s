@@ -8,7 +8,7 @@ data:
   USER_UID: "1000"
   USER_GID: "1000"
   DB_TYPE: postgres
-  DB_HOST: {{postgres.postgres_host}}:{{postgres.postgres_port}}
+  DB_HOST: "{{postgres.postgres_host}}:{{postgres.postgres_port}}"
   DB_name: {{gitea_data}}
   DB_USER: {{gitea_data}}
-  DB_PASSWD: {{gitea_data}}
+  DB_PASSWD: gitea

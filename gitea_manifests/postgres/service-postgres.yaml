@@ -11,4 +11,4 @@ spec:
     port: {{postgres.postgres_port}}
     targetPort: {{postgres.postgres_port}}
   selector:
-    app: gitea
+    app: postgres

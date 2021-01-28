@@ -6,5 +6,5 @@ metadata:
   name: configmap-postgres
 data:
   POSTGRES_USER: {{gitea_data}}
-  POSTGRES_PASSWORD: {{gitea_data}}
+  POSTGRES_PASSWORD: gitea
   POSTGRES_DB: {{gitea_data}}
